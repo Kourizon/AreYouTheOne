@@ -4,11 +4,13 @@ from random import shuffle
 
 first_names = ["Daniel","Phillip","Laura","Anne","Jeremy","Steven","Amanda","Shawn","William","Gregory","Theresa","Teresa","Howard","Alice","Russell","Michelle","Wanda","Paul","Marilyn","Bruce","Nancy","Carolyn","Donald","Tina","George","Lois","Fred","Anna","Andrea","Samuel","Joshua","Beverly","Aaron","Mildred","Kimberly","Jane","Wayne","Steve","Chris","Lillian","Frances","Douglas","Phyllis","Eugene","Nichola","Christine","Ernest","Paula","Betty","Gerald"]
 last_names = ["Jenkins","Campbell","Lopez","Johnson","Young","Alexander","Reed","Coleman","Morris","Green","Bryant","Allen","Richardson","Barnes","Rivera","Baker","Gonzales","Wilson","Hughes","Turner","Watson","James","Diaz","Peterson","Lewis","Ross","Gonzalez","King","Brooks","Moore","Garcia","Brown","Thomas","Collins","Scott","Jackson","Morgan","Davis","Stewart","Washington","Anderson","Williams","Griffin","Rodriguez","Murphy","Adams","Hill","Bell","Robinson","Gray"]
+
 shuffle(first_names)
 shuffle(last_names)
 
-#first_names = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p']
-#last_names = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16']
+first_names = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p']
+last_names = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16']
+
 
 contestants = []
 for i in range(16):
@@ -67,11 +69,25 @@ class ideal_week():
                     new_combsNC.add(c)
             self.all_combs = new_combsNC
 
+            
+
+
             highest_val = float('inf')
             for i in range(len(self.unused)):
                 for j in range(1,len(self.unused)-i):
                     occurs = 0
                     temp = tuple(sorted((self.unused[i],self.unused[i+j])))
+
+                    temp_exists = False
+                    for comb in self.all_combs:
+                        if temp in comb:
+                            temp_exists = True
+                            break
+                    
+                    if temp_exists == False:
+                        continue
+
+
                     for a in self.all_combs:
                         if temp in a:
                             occurs += 1
@@ -119,6 +135,10 @@ class ideal_week():
                     new_combsTB.add(a)
         
         self.all_combs = new_combsTB
+        if len(self.all_combs) < 6:
+            print(self.all_combs)
+            print(f"Unused: {self.unused}")
+            print(f"Answer: {Answers}")
 
 
 shuffle(contestants)
